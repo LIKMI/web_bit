@@ -1,5 +1,5 @@
 name: web_bit
-description: A new Flutter project.
+description: BIT LIKMI official website.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 0.0.1+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -74,3 +74,41 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Proxima Nova
+      fonts:
+        - asset: assets/fonts/Proxima Nova Alt Thin.otf
+          weight: 100
+        - asset: assets/fonts/Proxima Nova Alt Thin Italic.otf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/Proxima Nova Alt Light.otf
+          weight: 200
+        - asset: assets/fonts/Proxima Nova Alt Light Italic.otf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Proxima Nova Alt Regular.otf
+          weight: 400
+        - asset: assets/fonts/Proxima Nova Alt Regular Italic.otf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Proxima Nova Alt Semibold.otf
+          weight: 600
+        - asset: assets/fonts/Proxima Nova Alt Semibold Italic.otf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Proxima Nova Alt Bold.otf
+          weight: 700
+        - asset: assets/fonts/Proxima Nova Alt Bold Italic.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Proxima Nova Alt Extrabold.otf
+          weight: 800
+        - asset: assets/fonts/Proxima Nova Alt Extrabold Italic.otf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Proxima Nova Alt Black.otf
+          weight: 900
+        - asset: assets/fonts/Proxima Nova Alt Black Italic.otf
+          weight: 900
+          style: italic
