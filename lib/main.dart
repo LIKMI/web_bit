@@ -1,73 +1,38 @@
+// import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:web_bit/utils/authentication.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/home_page.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-ThemeData get bluTheme => ThemeData(
-      fontFamily: 'Proxima Nova',
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      primaryColor: Colors.blue[800],
-      accentColor: Colors.blueAccent[400],
-      backgroundColor: Color(0xFFFCFCFF),
-      scaffoldBackgroundColor: Color(0xFFFCFCFF),
-      appBarTheme: AppBarTheme(
-        textTheme: TextTheme(
-          headline6: TextStyle(
-            fontFamily: 'Proxima Nova',
-            color: Color(0xFF1E2D3B),
-            fontSize: 18.0,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-      ),
-    );
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class _MyAppState extends State<MyApp> {
+  Future getUserInfo() async {
+    await getUser();
+    setState(() {});
+    print(uid);
+  }
+
+  @override
+  void initState() {
+    getUserInfo();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BIT LIKMI',
-      theme: bluTheme,
+      title: 'Explore',
+      theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'BIT LIKMI',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue[800],
-                ),
-              ),
-              Text(
-                'Coming soon! 🤞',
-                style: TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-        ),
-      ),
+      home: HomePage(),
     );
   }
 }
