@@ -11,6 +11,12 @@
   <meta name="apple-mobile-web-app-title" content="web_bit">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
+  <!-- Add this meta tag for using Google Sign In -->
+    <meta
+    name="google-signin-client_id"
+    content="788878166372-o1tcn57cu2oaqsovj96c1qmpvvnfr533.apps.googleusercontent.com"
+  />
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
@@ -28,6 +34,36 @@
       });
     }
   </script>
+
+  <!-- FIREBASE INIT CODE -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+
+    <!-- Firebase Auth SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyCNbLJaJSSSXWk4Ndp3NI9FQlTb877lc7I",
+        authDomain: "bit-website-20296.firebaseapp.com",
+        projectId: "bit-website-20296",
+        storageBucket: "bit-website-20296.appspot.com",
+        messagingSenderId: "788878166372",
+        appId: "1:788878166372:web:097bfd5ecd60653a611271",
+        measurementId: "G-0S0XNKYKKZ"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+  <!-- END OF FIREBASE INIT CODE -->
+
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

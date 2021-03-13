@@ -1,6 +1,7 @@
 // import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:web_bit/utils/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:web_bit/utils/authentication.dart';
+import 'package:web_bit/utils/theme/theme_data.dart';
 
 import 'screens/home_page.dart';
 
@@ -29,8 +30,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Explore',
-      theme: ThemeData.light(),
+      title: 'BIT-LIKMI',
+      theme: lightTheme,
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
