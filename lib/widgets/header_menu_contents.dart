@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_bit/utils/authentication.dart';
+import 'package:web_bit/utils/theme_manager.dart';
 import 'package:web_bit/widgets/auth_dialog.dart';
 import 'package:web_bit/screens/home_page.dart';
 import 'package:web_bit/utils/theme/theme_data.dart';
@@ -129,18 +130,26 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                   ],
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.brightness_6),
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                color: Colors.white,
-                onPressed: () {
-                  // DynamicTheme.of(context).setBrightness(
-                  //     Theme.of(context).brightness == Brightness.dark
-                  //         ? Brightness.light
-                  //         : Brightness.dark);
-                },
-              ),
+              Switch(
+                    value: light,
+                    onChanged: (state) {
+                      setState(() {
+                        light = state;
+                      });
+                      saveTheme();
+                    }),
+              // IconButton(
+              //   icon: Icon(Icons.brightness_6),
+              //   splashColor: Colors.transparent,
+              //   highlightColor: Colors.transparent,
+              //   color: Colors.white,
+              //   onPressed: () {
+              //     // DynamicTheme.of(context).setBrightness(
+              //     //     Theme.of(context).brightness == Brightness.dark
+              //     //         ? Brightness.light
+              //     //         : Brightness.dark);
+              //   },
+              // ),
               SizedBox(
                 width: screenSize.width / 50,
               ),
