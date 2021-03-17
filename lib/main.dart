@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_bit/utils/authentication.dart';
-import 'package:web_bit/utils/storage_manager.dart';
 import 'package:web_bit/utils/theme/theme_data.dart';
 import 'package:web_bit/utils/theme_manager.dart';
 
@@ -25,9 +22,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future getUserInfo() async {
+    await getTheme();
+    print('dark mode: $light');
     await getUser();
-    setState(() {});
     print('uid: $uid');
+    setState(() {});
   }
 
   @override
@@ -43,44 +42,5 @@ class _MyAppState extends State<MyApp> {
             home: HomePage(),
           );
         });
-    // return Consumer(
-    //   builder: (context, watch, child) {
-    //     final themeModeNotifier = watch(themeModeProvider);
-    //     return MaterialApp(
-    //       title: 'BIT-LIKMI',
-    //       theme: themeModeNotifier.getTheme(),
-    //       darkTheme: darkTheme,
-    //       debugShowCheckedModeBanner: false,
-    //       home: HomePage(),
-    //     );
-    //   },
-    // );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return FutureBuilder(
-  //       future: _lightF,
-  //       builder: (context, snapshot) {
-  //         return MaterialApp(
-  //           theme: _light ? _lightTheme : _darkTheme,
-  //           title: 'Material Apps',
-  //           home: Scaffold(
-  //             appBar: AppBar(
-  //               title: Text('wawaw'),
-  //             ),
-  //             body: Center(
-  //               child: Switch(
-  //                   value: _light,
-  //                   onChanged: (state) {
-  //                     setState(() {
-  //                       _light = state;
-  //                     });
-  //                     _saveTheme();
-  //                   }),
-  //             ),
-  //           ),
-  //         );
-  //       });
-  // }
 }

@@ -20,9 +20,7 @@ class _GoogleButtonState extends State<GoogleButton> {
         ),
         color: Colors.white,
       ),
-      child: OutlineButton(
-        highlightColor: Colors.blueGrey[100],
-        splashColor: Colors.blueGrey[200],
+      child: OutlinedButton(
         onPressed: () async {
           setState(() {
             _isProcessing = true;
@@ -45,11 +43,6 @@ class _GoogleButtonState extends State<GoogleButton> {
             _isProcessing = false;
           });
         },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: Colors.blueGrey, width: 3),
-        ),
-        highlightElevation: 0,
         // borderSide: BorderSide(color: Colors.blueGrey, width: 3),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),

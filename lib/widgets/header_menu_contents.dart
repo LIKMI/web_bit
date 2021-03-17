@@ -198,10 +198,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                             ),
                           ),
                           SizedBox(width: 10),
-                          FlatButton(
-                            color: Colors.blueGrey,
-                            hoverColor: Colors.blueGrey[700],
-                            highlightColor: Colors.blueGrey[800],
+                          TextButton(
                             onPressed: _isProcessing
                                 ? null
                                 : () async {
@@ -223,9 +220,6 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                                       _isProcessing = false;
                                     });
                                   },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
                             child: Padding(
                               padding: EdgeInsets.only(
                                 top: 8.0,
