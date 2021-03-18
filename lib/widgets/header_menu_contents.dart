@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:web_bit/providers/providers_global.dart';
 import 'package:web_bit/utils/authentication.dart';
-import 'package:web_bit/utils/theme_manager.dart';
 import 'package:web_bit/widgets/auth_dialog.dart';
 import 'package:web_bit/screens/home_page.dart';
-import 'package:web_bit/utils/theme/theme_data.dart';
+import 'package:web_bit/utils/theme_data.dart';
+import 'package:web_bit/widgets/theme_mode_switch.dart';
 
 class HeaderMenuContents extends StatefulWidget {
   final double opacity;
@@ -130,26 +132,14 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                   ],
                 ),
               ),
-              Switch(
-                    value: light,
-                    onChanged: (state) {
-                      setState(() {
-                        light = state;
-                      });
-                      saveTheme();
-                    }),
-              // IconButton(
-              //   icon: Icon(Icons.brightness_6),
-              //   splashColor: Colors.transparent,
-              //   highlightColor: Colors.transparent,
-              //   color: Colors.white,
-              //   onPressed: () {
-              //     // DynamicTheme.of(context).setBrightness(
-              //     //     Theme.of(context).brightness == Brightness.dark
-              //     //         ? Brightness.light
-              //     //         : Brightness.dark);
-              //   },
-              // ),
+              Consumer(builder: (context, watch, _) {
+                return ThemeModeSwitch(
+                  themeMode: watch(themeModeProvider).state,
+                  onThemeMode: (ThemeMode newMode) {
+                    context.read(themeModeProvider).state = newMode;
+                  },
+                );
+              }),
               SizedBox(
                 width: screenSize.width / 50,
               ),

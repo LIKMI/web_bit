@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:web_bit/utils/theme/theme_colors.dart';
 
 // Name of the application
 const String websiteTitle = 'WEB-BIT';
@@ -9,12 +8,12 @@ const String homeTitle = 'BIT-LIKMI';
 
 /// Title Text Style
 TextStyle get titleTextStyle => TextStyle(
-  color: Colors.blueGrey,
-  fontSize: 20,
-  fontFamily: 'Proxima Nova',
-  fontWeight: FontWeight.w600,
-  letterSpacing: 3,
-);
+      color: Colors.blueGrey,
+      fontSize: 20,
+      fontFamily: 'Proxima Nova',
+      fontWeight: FontWeight.w600,
+      letterSpacing: 3,
+    );
 
 // Light Theme
 ThemeData get lightTheme => ThemeData(
@@ -33,6 +32,12 @@ ThemeData get lightTheme => ThemeData(
         color: Colors.black,
       ),
       headline1: TextStyle(color: Colors.blueGrey[800]),
+    ),
+    toggleButtonsTheme: ToggleButtonsThemeData(
+      selectedColor: Colors.white,
+      color: Colors.blueGrey[100],
+      fillColor: Colors.white24,
+      splashColor: Colors.transparent,
     ),
     bottomAppBarColor: Colors.blueGrey[900],
     iconTheme: IconThemeData(color: Colors.blueGrey));
@@ -56,6 +61,12 @@ ThemeData get darkTheme => ThemeData(
         headline1: TextStyle(
           color: Colors.white70,
         ),
+      ),
+      toggleButtonsTheme: ToggleButtonsThemeData(
+        selectedColor: Colors.white,
+        color: Colors.blueGrey[100],
+        fillColor: Colors.white24,
+        splashColor: Colors.transparent,
       ),
       bottomAppBarColor: Colors.black,
       iconTheme: IconThemeData(color: Colors.blueGrey[200]),

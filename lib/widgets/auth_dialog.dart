@@ -1,7 +1,7 @@
 import 'package:web_bit/screens/home_page.dart';
 import 'package:web_bit/utils/authentication.dart';
 import 'package:flutter/material.dart';
-import 'package:web_bit/utils/theme/theme_data.dart';
+import 'package:web_bit/utils/theme_data.dart';
 
 import 'google_sign_in_button.dart';
 

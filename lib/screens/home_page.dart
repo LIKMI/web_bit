@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:web_bit/utils/theme/theme_data.dart';
-import 'package:web_bit/utils/theme_manager.dart';
+import 'package:web_bit/utils/theme_data.dart';
 import 'package:web_bit/widgets/responsive.dart';
 import 'package:web_bit/widgets/header_menu_contents.dart';
 

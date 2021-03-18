@@ -1,46 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:web_bit/utils/storage_manager.dart';
-import 'package:web_bit/utils/theme/theme_data.dart';
 
-bool light = true;
-late Future<dynamic> lightF;
+late ThemeMode currentTheme;
 
-saveTheme() async {
-  StorageManager.saveData('themeMode', light);
+saveTheme(ThemeMode themeMode) async {
+  String currentTheme = _themeToString(themeMode);
+  StorageManager.saveData('themeMode', currentTheme);
 }
 
 getTheme() async {
-  lightF = StorageManager.readData('themeMode').then((value) {
-    return value != null ? value : true;
-  });
-  light = await lightF;
+   StorageManager.readData('themeMode').then((value) {
+      currentTheme = _stringToTheme(value);
+    });
 }
 
-class ThemeModeNotifier with ChangeNotifier {
-  ThemeData _themeData = lightTheme;
-  ThemeData getTheme() => _themeData;
-
-  ThemeModeNotifier() {
-    StorageManager.readData('themeMode').then((value) {
-      var themeMode = value ?? 'light';
-      if (themeMode == 'dark') {
-        _themeData = darkTheme;
-      } else {
-        _themeData = lightTheme;
-      }
-      notifyListeners();
-    });
+_themeToString(ThemeMode themeMode) {
+  switch (themeMode) {
+    case ThemeMode.light:
+      return 'light';
+    case ThemeMode.dark:
+      return 'dark';
+    default:
+      return 'system';
   }
+}
 
-  void setDarkMode() async {
-    _themeData = darkTheme;
-    StorageManager.saveData('themeMode', 'dark');
-    notifyListeners();
-  }
-
-  void setLightMode() async {
-    _themeData = lightTheme;
-    StorageManager.saveData('themeMode', 'light');
-    notifyListeners();
+_stringToTheme(String stringThemeMode) {
+  switch (stringThemeMode) {
+    case 'light':
+      return ThemeMode.light;
+    case 'dark':
+      return ThemeMode.dark;
+    default:
+      return ThemeMode.system;
   }
 }
