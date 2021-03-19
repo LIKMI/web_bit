@@ -33,7 +33,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    final textHeaderTheme = Theme.of(context).textButtonTheme;
+    final primaryTextTheme = Theme.of(context).primaryTextTheme;
 
     return PreferredSize(
       preferredSize: Size(screenSize.width, 1000),
@@ -53,7 +53,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
               Text(
                 homeTitle,
                 style: TextStyle(
-                  color: Colors.blueGrey[100],
+                  color: primaryTextTheme.subtitle1!.color,
                   fontSize: 20,
                   fontFamily: 'Proxima Nova',
                   fontWeight: FontWeight.w600,
@@ -78,11 +78,13 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Discover',
+                            'Recent Project',
                             style: TextStyle(
+                              fontFamily: 'Proxima Nova',
+                              fontSize: 15.0,
                               color: _isHovering[0]
-                                  ? Colors.blue[200]
-                                  : Colors.white,
+                                  ? primaryTextTheme.subtitle1!.decorationColor
+                                  : primaryTextTheme.subtitle1!.color,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -94,7 +96,8 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                             child: Container(
                               height: 2,
                               width: 20,
-                              color: Colors.white,
+                              color:
+                                  primaryTextTheme.subtitle1!.decorationColor,
                             ),
                           )
                         ],
@@ -114,11 +117,13 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Contact Us',
+                            'How To Contribute',
                             style: TextStyle(
+                              fontFamily: 'Proxima Nova',
+                              fontSize: 15.0,
                               color: _isHovering[1]
-                                  ? Colors.blue[200]
-                                  : Colors.white,
+                                  ? primaryTextTheme.subtitle1!.decorationColor
+                                  : primaryTextTheme.subtitle1!.color,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -130,7 +135,8 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                             child: Container(
                               height: 2,
                               width: 20,
-                              color: Colors.white,
+                              color:
+                                  primaryTextTheme.subtitle1!.decorationColor,
                             ),
                           )
                         ],
@@ -168,7 +174,9 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                     ? Text(
                         'Sign in',
                         style: TextStyle(
-                          color: _isHovering[3] ? Colors.white : Colors.white70,
+                          color: _isHovering[3]
+                              ? primaryTextTheme.subtitle1!.decorationColor
+                              : primaryTextTheme.subtitle1!.color,
                         ),
                       )
                     : Row(
@@ -189,9 +197,10 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                           Text(
                             (name ?? userEmail)!,
                             style: TextStyle(
+                              fontFamily: 'Proxima Nova',
                               color: _isHovering[3]
-                                  ? Colors.white
-                                  : Colors.white70,
+                                  ? primaryTextTheme.subtitle1!.decorationColor
+                                  : primaryTextTheme.subtitle1!.color,
                             ),
                           ),
                           SizedBox(width: 10),
@@ -227,8 +236,9 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                                   : Text(
                                       'Sign out',
                                       style: TextStyle(
+                                        fontFamily: 'Proxima Nova',
                                         fontSize: 14,
-                                        color: Colors.white,
+                                        color: primaryTextTheme.subtitle1!.color,
                                       ),
                                     ),
                             ),

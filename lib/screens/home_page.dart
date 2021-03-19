@@ -62,17 +62,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               elevation: 0,
               centerTitle: true,
               actions: [
-                // IconButton(
-                //   icon: Icon(Icons.brightness_6),
-                //   splashColor: Colors.transparent,
-                //   highlightColor: Colors.transparent,
-                //   onPressed: () {
-                //     setState(() {
-                //       light = true;
-                //     });
-                //     //Change mode *Not Implemented
-                //   },
-                // ),
               ],
               title: Text(homeTitle, style: titleTextStyle),
             )
@@ -93,6 +82,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 'assets/images/1.jpg',
                 fit: BoxFit.cover,
               ),
+            ),
+            SizedBox(
+              height: screenSize.height * 0.45,
+              width: screenSize.width
             ),
             SizedBox(
               height: screenSize.height * 0.45,
