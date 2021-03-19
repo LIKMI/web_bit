@@ -46,8 +46,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    _opacity = _scrollPosition < screenSize.height * 0.40
-        ? _scrollPosition / (screenSize.height * 0.40)
+    _opacity = _scrollPosition < screenSize.height * 0.20
+        ? _scrollPosition / (screenSize.height * 0.20)
         : 1;
 
     return Scaffold(
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               height: screenSize.height * 0.45,
               width: screenSize.width,
               child: Image.asset(
-                'assets/images/cover.jpg',
+                'assets/images/1.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -104,7 +104,15 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               height: screenSize.height * 0.45,
               width: screenSize.width,
               child: Image.asset(
-                'assets/images/cover.jpg',
+                'assets/images/europe.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(
+              height: screenSize.height * 0.45,
+              width: screenSize.width,
+              child: Image.asset(
+                'assets/images/asia.jpg',
                 fit: BoxFit.cover,
               ),
             ),

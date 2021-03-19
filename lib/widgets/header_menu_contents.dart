@@ -33,6 +33,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    final textHeaderTheme = Theme.of(context).textButtonTheme;
 
     return PreferredSize(
       preferredSize: Size(screenSize.width, 1000),
@@ -43,13 +44,21 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/images/m_nilai_semester_aktif_64px.png',
+                height: 40,
+                fit: BoxFit.fitHeight,
+                isAntiAlias: true,
+                filterQuality: FilterQuality.high,
+              ),
+              SizedBox(width: 10),
               Text(
                 homeTitle,
                 style: TextStyle(
                   color: Colors.blueGrey[100],
                   fontSize: 20,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Proxima Nova',
+                  fontWeight: FontWeight.w600,
                   letterSpacing: 3,
                 ),
               ),

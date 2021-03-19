@@ -8,7 +8,10 @@ import 'package:web_bit/utils/theme_manager.dart';
 import 'screens/home_page.dart';
 
 void main() {
+  // Preload data on first launch
+  getTheme();
   runApp(
+    // Enable riverpod provider 
     ProviderScope(child: MyApp()),
   );
 }
@@ -17,7 +20,6 @@ class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
-
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
@@ -26,9 +28,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future getUserInfo() async {
-    await getTheme();
     await getUser();
     print('uid: $uid');
+    print('theme: $currentTheme');
     setState(() {});
   }
 
