@@ -44,12 +44,10 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/m_nilai_semester_aktif_64px.png',
-                height: 40,
-                fit: BoxFit.fitHeight,
-                isAntiAlias: true,
-                filterQuality: FilterQuality.high,
+              Container(
+                width: 50,
+                height: 50,
+                child: FlutterLogo(),
               ),
               SizedBox(width: 10),
               Text(

@@ -46,13 +46,15 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    _opacity = _scrollPosition < screenSize.height * 0.20
-        ? _scrollPosition / (screenSize.height * 0.20)
-        : 1;
+    // Turn off opacity on scroll
+    // _opacity = _scrollPosition < screenSize.height * 0.30
+    //     ? _scrollPosition / (screenSize.height * 0.30)
+    //     : 1;
+    _opacity = 1;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false, // Turn off opacity on scroll
       appBar: ResponsiveWidget.isSmallScreen(context)
           ? AppBar(
               backgroundColor:
@@ -89,14 +91,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               width: screenSize.width,
               child: Image.asset(
                 'assets/images/1.jpg',
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(
-              height: screenSize.height * 0.45,
-              width: screenSize.width,
-              child: Image.asset(
-                'assets/images/cover.jpg',
                 fit: BoxFit.cover,
               ),
             ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web_bit/providers/providers_global.dart';
@@ -11,7 +13,7 @@ void main() {
   // Preload data on first launch
   getTheme();
   runApp(
-    // Enable riverpod provider 
+    // Enable riverpod provider
     ProviderScope(child: MyApp()),
   );
 }
@@ -20,6 +22,7 @@ class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
@@ -49,12 +52,41 @@ class MainWidget extends ConsumerWidget {
     saveTheme(themeMode);
 
     return MaterialApp(
-      title: 'BIT-LIKMI',
+      title: 'BIT LIKMI',
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: SplashScreen(),
+    );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+      Duration(seconds: 3),
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: FlutterLogo(size: MediaQuery.of(context).size.height),
     );
   }
 }
