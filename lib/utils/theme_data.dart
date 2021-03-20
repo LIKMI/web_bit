@@ -29,7 +29,7 @@ ThemeData get lightTheme => ThemeData(
         // Menu
         subtitle2: TextStyle(
           fontFamily: 'Proxima Nova',
-          fontSize: 15.0,
+          fontSize: 16.0,
           fontWeight: FontWeight.w600,
           color: Colors.blueGrey,
           decorationColor: Colors.red
@@ -37,7 +37,7 @@ ThemeData get lightTheme => ThemeData(
         // Button
         button: TextStyle(
           fontFamily: 'Proxima Nova',
-          fontSize: 15.0,
+          fontSize: 16.0,
           fontWeight: FontWeight.w600,
           color: Colors.white,
           decorationColor: Colors.red
@@ -83,7 +83,7 @@ ThemeData get darkTheme => ThemeData(
         // Menu
         subtitle2: TextStyle(
           fontFamily: 'Proxima Nova',
-          fontSize: 15.0,
+          fontSize: 16.0,
           fontWeight: FontWeight.w600,
           color: Colors.white,
           decorationColor: Colors.red
@@ -91,7 +91,7 @@ ThemeData get darkTheme => ThemeData(
         // Button
         button: TextStyle(
           fontFamily: 'Proxima Nova',
-          fontSize: 15.0,
+          fontSize: 16.0,
           fontWeight: FontWeight.w600,
           color: Colors.white,
           decorationColor: Colors.red

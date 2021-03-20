@@ -84,8 +84,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context).bottomAppBarColor;
     return Container(
-      color: Colors.white,
+      color: themeData,
       child: FlutterLogo(size: MediaQuery.of(context).size.height),
     );
   }

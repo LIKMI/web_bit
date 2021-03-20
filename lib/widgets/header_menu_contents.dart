@@ -35,7 +35,6 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
-    final buttonTheme = Theme.of(context).buttonTheme;
 
     return PreferredSize(
       preferredSize: Size(screenSize.width, 1000),
@@ -58,81 +57,89 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(width: screenSize.width / 8),
-                    InkWell(
-                      onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[0] = true
-                              : _isHovering[0] = false;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Recent Project',
-                            style: TextStyle(
-                              fontFamily: textTheme.subtitle2!.fontFamily,
-                              fontWeight: textTheme.subtitle2!.fontWeight,
-                              fontSize: textTheme.subtitle2!.fontSize,
-                              color: _isHovering[0]
-                                  ? textTheme.subtitle2!.decorationColor
-                                  : textTheme.subtitle2!.color,
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: InkWell(
+                        onHover: (value) {
+                          setState(() {
+                            value
+                                ? _isHovering[0] = true
+                                : _isHovering[0] = false;
+                          });
+                        },
+                        onTap: () {},
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Recent Project',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: textTheme.subtitle2!.fontFamily,
+                                fontWeight: textTheme.subtitle2!.fontWeight,
+                                fontSize: textTheme.subtitle2!.fontSize,
+                                color: _isHovering[0]
+                                    ? textTheme.subtitle2!.decorationColor
+                                    : textTheme.subtitle2!.color,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[0],
-                            child: Container(
-                              height: 2,
-                              width: 20,
-                              color: textTheme.subtitle2!.decorationColor,
-                            ),
-                          )
-                        ],
+                            SizedBox(height: 5),
+                            Visibility(
+                              maintainAnimation: true,
+                              maintainState: true,
+                              maintainSize: true,
+                              visible: _isHovering[0],
+                              child: Container(
+                                height: 2,
+                                width: 20,
+                                color: textTheme.subtitle2!.decorationColor,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(width: screenSize.width / 30),
-                    InkWell(
-                      onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[1] = true
-                              : _isHovering[1] = false;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'How To Contribute',
-                            style: TextStyle(
-                              fontFamily: textTheme.subtitle2!.fontFamily,
-                              fontWeight: textTheme.subtitle2!.fontWeight,
-                              fontSize: textTheme.subtitle2!.fontSize,
-                              color: _isHovering[1]
-                                  ? textTheme.subtitle2!.decorationColor
-                                  : textTheme.subtitle2!.color,
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: InkWell(
+                        onHover: (value) {
+                          setState(() {
+                            value
+                                ? _isHovering[1] = true
+                                : _isHovering[1] = false;
+                          });
+                        },
+                        onTap: () {},
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'How To Contribute',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: textTheme.subtitle2!.fontFamily,
+                                fontWeight: textTheme.subtitle2!.fontWeight,
+                                fontSize: textTheme.subtitle2!.fontSize,
+                                color: _isHovering[1]
+                                    ? textTheme.subtitle2!.decorationColor
+                                    : textTheme.subtitle2!.color,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[1],
-                            child: Container(
-                              height: 2,
-                              width: 20,
-                              color: textTheme.subtitle2!.decorationColor,
-                            ),
-                          )
-                        ],
+                            SizedBox(height: 5),
+                            Visibility(
+                              maintainAnimation: true,
+                              maintainState: true,
+                              maintainSize: true,
+                              visible: _isHovering[1],
+                              child: Container(
+                                height: 2,
+                                width: 20,
+                                color: textTheme.subtitle2!.decorationColor,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
