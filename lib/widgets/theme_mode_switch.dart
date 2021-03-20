@@ -35,6 +35,7 @@ class _ThemeModeSwitchState extends State<ThemeModeSwitch> {
       selectedColor: toggleButtonsTheme.selectedColor,
       color: toggleButtonsTheme.color,
       splashColor: toggleButtonsTheme.splashColor,
+      hoverColor: toggleButtonsTheme.hoverColor,
       borderWidth: 0,
       renderBorder: false,
       onPressed: (int newIndex) {

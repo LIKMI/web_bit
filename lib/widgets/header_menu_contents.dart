@@ -5,6 +5,7 @@ import 'package:web_bit/utils/authentication.dart';
 import 'package:web_bit/widgets/auth_dialog.dart';
 import 'package:web_bit/screens/home_page.dart';
 import 'package:web_bit/utils/theme_data.dart';
+import 'package:web_bit/widgets/flat_button.dart';
 import 'package:web_bit/widgets/theme_mode_switch.dart';
 
 class HeaderMenuContents extends StatefulWidget {
@@ -33,7 +34,8 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    final primaryTextTheme = Theme.of(context).primaryTextTheme;
+    final textTheme = Theme.of(context).textTheme;
+    final buttonTheme = Theme.of(context).buttonTheme;
 
     return PreferredSize(
       preferredSize: Size(screenSize.width, 1000),
@@ -50,16 +52,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                 child: FlutterLogo(),
               ),
               SizedBox(width: 10),
-              Text(
-                homeTitle,
-                style: TextStyle(
-                  color: primaryTextTheme.subtitle1!.color,
-                  fontSize: 20,
-                  fontFamily: 'Proxima Nova',
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 3,
-                ),
-              ),
+              Text(homeTitle, style: textTheme.subtitle1),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -80,11 +73,12 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                           Text(
                             'Recent Project',
                             style: TextStyle(
-                              fontFamily: 'Proxima Nova',
-                              fontSize: 15.0,
+                              fontFamily: textTheme.subtitle2!.fontFamily,
+                              fontWeight: textTheme.subtitle2!.fontWeight,
+                              fontSize: textTheme.subtitle2!.fontSize,
                               color: _isHovering[0]
-                                  ? primaryTextTheme.subtitle1!.decorationColor
-                                  : primaryTextTheme.subtitle1!.color,
+                                  ? textTheme.subtitle2!.decorationColor
+                                  : textTheme.subtitle2!.color,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -96,14 +90,13 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                             child: Container(
                               height: 2,
                               width: 20,
-                              color:
-                                  primaryTextTheme.subtitle1!.decorationColor,
+                              color: textTheme.subtitle2!.decorationColor,
                             ),
                           )
                         ],
                       ),
                     ),
-                    SizedBox(width: screenSize.width / 20),
+                    SizedBox(width: screenSize.width / 30),
                     InkWell(
                       onHover: (value) {
                         setState(() {
@@ -119,11 +112,12 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                           Text(
                             'How To Contribute',
                             style: TextStyle(
-                              fontFamily: 'Proxima Nova',
-                              fontSize: 15.0,
+                              fontFamily: textTheme.subtitle2!.fontFamily,
+                              fontWeight: textTheme.subtitle2!.fontWeight,
+                              fontSize: textTheme.subtitle2!.fontSize,
                               color: _isHovering[1]
-                                  ? primaryTextTheme.subtitle1!.decorationColor
-                                  : primaryTextTheme.subtitle1!.color,
+                                  ? textTheme.subtitle2!.decorationColor
+                                  : textTheme.subtitle2!.color,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -135,8 +129,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                             child: Container(
                               height: 2,
                               width: 20,
-                              color:
-                                  primaryTextTheme.subtitle1!.decorationColor,
+                              color: textTheme.subtitle2!.decorationColor,
                             ),
                           )
                         ],
@@ -156,96 +149,84 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
               SizedBox(
                 width: screenSize.width / 50,
               ),
-              InkWell(
-                onHover: (value) {
-                  setState(() {
-                    value ? _isHovering[3] = true : _isHovering[3] = false;
-                  });
-                },
-                onTap: userEmail == null
-                    ? () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AuthDialog(),
-                        );
-                      }
-                    : null,
-                child: userEmail == null
-                    ? Text(
+              userEmail == null
+                  ? CustomFlatButton(
+                      textStyle: textTheme.button,
+                      onPressed: userEmail == null
+                          ? () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AuthDialog(),
+                              );
+                            }
+                          : null,
+                      childWidget: Text(
                         'Sign in',
-                        style: TextStyle(
-                          color: _isHovering[3]
-                              ? primaryTextTheme.subtitle1!.decorationColor
-                              : primaryTextTheme.subtitle1!.color,
-                        ),
-                      )
-                    : Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundImage: imageUrl != null
-                                ? NetworkImage(imageUrl!)
-                                : null,
-                            child: imageUrl == null
-                                ? Icon(
-                                    Icons.account_circle,
-                                    size: 30,
-                                  )
-                                : Container(),
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            (name ?? userEmail)!,
-                            style: TextStyle(
-                              fontFamily: 'Proxima Nova',
-                              color: _isHovering[3]
-                                  ? primaryTextTheme.subtitle1!.decorationColor
-                                  : primaryTextTheme.subtitle1!.color,
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          TextButton(
-                            onPressed: _isProcessing
-                                ? null
-                                : () async {
-                                    setState(() {
-                                      _isProcessing = true;
-                                    });
-                                    await signOut().then((result) {
-                                      print(result);
-                                      Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                          fullscreenDialog: true,
-                                          builder: (context) => HomePage(),
-                                        ),
-                                      );
-                                    }).catchError((error) {
-                                      print('Sign Out Error: $error');
-                                    });
-                                    setState(() {
-                                      _isProcessing = false;
-                                    });
-                                  },
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                top: 8.0,
-                                bottom: 8.0,
-                              ),
-                              child: _isProcessing
-                                  ? CircularProgressIndicator()
-                                  : Text(
-                                      'Sign out',
-                                      style: TextStyle(
-                                        fontFamily: 'Proxima Nova',
-                                        fontSize: 14,
-                                        color: primaryTextTheme.subtitle1!.color,
-                                      ),
-                                    ),
-                            ),
-                          )
-                        ],
                       ),
-              ),
+                    )
+                  : Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundImage:
+                              imageUrl != null ? NetworkImage(imageUrl!) : null,
+                          child: imageUrl == null
+                              ? Icon(
+                                  Icons.account_circle,
+                                  size: 30,
+                                )
+                              : Container(),
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          (name ?? userEmail)!,
+                          style: TextStyle(
+                            fontFamily: textTheme.subtitle2!.fontFamily,
+                            fontWeight: textTheme.subtitle2!.fontWeight,
+                            fontSize: textTheme.subtitle2!.fontSize,
+                            color: _isHovering[3]
+                                ? textTheme.subtitle2!.decorationColor
+                                : textTheme.subtitle2!.color,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        CustomFlatButton(
+                          textStyle: textTheme.button,
+                          onPressed: _isProcessing
+                              ? null
+                              : () async {
+                                  setState(() {
+                                    _isProcessing = true;
+                                  });
+                                  await signOut().then((result) {
+                                    print(result);
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        fullscreenDialog: true,
+                                        builder: (context) => HomePage(),
+                                      ),
+                                    );
+                                  }).catchError((error) {
+                                    print('Sign Out Error: $error');
+                                  });
+                                  setState(() {
+                                    _isProcessing = false;
+                                  });
+                                },
+                          childWidget: Padding(
+                            padding: EdgeInsets.only(
+                              top: 8.0,
+                              bottom: 8.0,
+                            ),
+                            child: _isProcessing
+                                ? CircularProgressIndicator(
+                                    backgroundColor: textTheme.button!.color,
+                                  )
+                                : Text('Sign out'),
+                          ),
+                        ),
+                      ],
+                    ),
             ],
           ),
         ),

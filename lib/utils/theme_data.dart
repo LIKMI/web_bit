@@ -17,6 +17,40 @@ TextStyle get titleTextStyle => TextStyle(
 
 // Light Theme
 ThemeData get lightTheme => ThemeData(
+      textTheme: TextTheme(
+        // Appbar Title
+        subtitle1: TextStyle(
+          fontFamily: 'Proxima Nova',
+          color: Colors.blueGrey,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 3,
+        ),
+        // Menu
+        subtitle2: TextStyle(
+          fontFamily: 'Proxima Nova',
+          fontSize: 15.0,
+          fontWeight: FontWeight.w600,
+          color: Colors.blueGrey,
+          decorationColor: Colors.red
+        ),
+        // Button
+        button: TextStyle(
+          fontFamily: 'Proxima Nova',
+          fontSize: 15.0,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+          decorationColor: Colors.red
+        ),
+      ),
+      // Toggle button
+      toggleButtonsTheme: ToggleButtonsThemeData(
+        selectedColor: Colors.white,
+        color: Colors.blueGrey,
+        fillColor: Colors.red,
+        splashColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+      ),
       primarySwatch: Colors.blue,
       backgroundColor: Colors.white,
       cardColor: Colors.blueGrey[50],
@@ -31,18 +65,46 @@ ThemeData get lightTheme => ThemeData(
         ),
         headline1: TextStyle(color: Colors.blueGrey[800]),
       ),
-      toggleButtonsTheme: ToggleButtonsThemeData(
-        selectedColor: Colors.white,
-        color: Colors.blueGrey[100],
-        fillColor: Colors.white24,
-        splashColor: Colors.transparent,
-      ),
       bottomAppBarColor: Colors.white,
       iconTheme: IconThemeData(color: Colors.blueGrey),
     );
 
 // Dark Theme
 ThemeData get darkTheme => ThemeData(
+      textTheme: TextTheme(
+        // Appbar Title
+        subtitle1: TextStyle(
+          fontFamily: 'Proxima Nova',
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 3,
+        ),
+        // Menu
+        subtitle2: TextStyle(
+          fontFamily: 'Proxima Nova',
+          fontSize: 15.0,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+          decorationColor: Colors.red
+        ),
+        // Button
+        button: TextStyle(
+          fontFamily: 'Proxima Nova',
+          fontSize: 15.0,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+          decorationColor: Colors.red
+        ),
+      ),
+      // Toggle button
+      toggleButtonsTheme: ToggleButtonsThemeData(
+        selectedColor: Colors.white,
+        color: Colors.blueGrey[100],
+        fillColor: Colors.white24,
+        splashColor: Colors.transparent,
+        hoverColor: Colors.white24,
+      ),
       primarySwatch: Colors.blueGrey,
       backgroundColor: Colors.blueGrey,
       cardColor: Colors.blueGrey[50],
@@ -57,12 +119,7 @@ ThemeData get darkTheme => ThemeData(
         ),
         headline1: TextStyle(color: Colors.blueGrey[800]),
       ),
-      toggleButtonsTheme: ToggleButtonsThemeData(
-        selectedColor: Colors.white,
-        color: Colors.blueGrey[100],
-        fillColor: Colors.white24,
-        splashColor: Colors.transparent,
-      ),
+      
       bottomAppBarColor: Colors.blueGrey[900],
       iconTheme: IconThemeData(color: Colors.blueGrey),
     );
