@@ -51,7 +51,7 @@ ThemeData get lightTheme => ThemeData(
         splashColor: Colors.transparent,
         hoverColor: Colors.transparent,
       ),
-      primarySwatch: Colors.blue,
+      primarySwatch: Colors.red,
       backgroundColor: Colors.white,
       cardColor: Colors.blueGrey[50],
       primaryTextTheme: TextTheme(
@@ -65,7 +65,7 @@ ThemeData get lightTheme => ThemeData(
         ),
         headline1: TextStyle(color: Colors.blueGrey[800]),
       ),
-      bottomAppBarColor: Colors.white,
+      bottomAppBarColor: Color(0xFFE6E6E6),
       iconTheme: IconThemeData(color: Colors.blueGrey),
     );
 
