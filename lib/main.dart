@@ -10,7 +10,7 @@ import 'package:web_bit/utils/theme_manager.dart';
 import 'screens/home_page.dart';
 
 void main() async{
-  // Preload data on first launch
+  // Preload first launch theme data before attach to screen
   await getTheme();
   runApp(
     // Enable riverpod provider
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 3),
+      Duration(seconds: 1),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(

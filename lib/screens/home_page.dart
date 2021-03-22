@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     var screenSize = MediaQuery.of(context).size;
     // Turn off opacity on scroll
     // _opacity = _scrollPosition < screenSize.height * 0.30
@@ -57,55 +58,95 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       extendBodyBehindAppBar: false, // Turn off opacity on scroll
       appBar: ResponsiveWidget.isSmallScreen(context)
           ? AppBar(
+              iconTheme: IconThemeData(
+                color: textTheme.headline1!.color,
+              ),
               backgroundColor:
                   Theme.of(context).bottomAppBarColor.withOpacity(_opacity),
               elevation: 0,
-              centerTitle: true,
-              actions: [
-              ],
-              title: Text(homeTitle, style: titleTextStyle),
+              automaticallyImplyLeading: false,
+              title: Row(
+                children: [
+                  FlutterLogo(),
+                  Text(homeTitle, style: textTheme.headline1),
+                ],
+              ),
             )
           : PreferredSize(
               preferredSize: Size(screenSize.width, 1000),
               child: HeaderMenuContents(_opacity),
             ),
       body: Container(
-          child: SingleChildScrollView(
-        controller: _scrollController,
-        physics: ClampingScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(
-              height: screenSize.height * 0.45,
-              width: screenSize.width,
-              child: Image.asset(
-                'assets/images/1.jpg',
-                fit: BoxFit.cover,
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          physics: ClampingScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(
+                height: screenSize.height * 0.45,
+                width: screenSize.width,
+                child: Image.asset(
+                  'assets/images/1.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            SizedBox(
-              height: screenSize.height * 0.45,
-              width: screenSize.width
-            ),
-            SizedBox(
-              height: screenSize.height * 0.45,
-              width: screenSize.width,
-              child: Image.asset(
-                'assets/images/europe.jpg',
-                fit: BoxFit.cover,
+              SizedBox(
+                  height: screenSize.height * 0.45, width: screenSize.width),
+              SizedBox(
+                height: screenSize.height * 0.45,
+                width: screenSize.width,
+                child: Image.asset(
+                  'assets/images/europe.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            SizedBox(
-              height: screenSize.height * 0.45,
-              width: screenSize.width,
-              child: Image.asset(
-                'assets/images/asia.jpg',
-                fit: BoxFit.cover,
+              SizedBox(
+                height: screenSize.height * 0.45,
+                width: screenSize.width,
+                child: Image.asset(
+                  'assets/images/asia.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      )),
+      ),
+      drawer: Drawer(
+        child: Container(
+          color: Theme.of(context).backgroundColor,
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Drawer Header'),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).bottomAppBarColor,
+                ),
+              ),
+              ListTile(
+                title: Text('Item 1'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Item 2'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
+        child: const Icon(Icons.menu),
+      ),
     );
   }
 }
