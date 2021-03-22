@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:web_bit/utils/storage_manager.dart';
 
 /// Global Value
-late ThemeMode currentTheme = ThemeMode.system;
+late ThemeMode currentTheme;
 
 /// Save theme mode applied on rebuild main to user preference
 ///
@@ -22,9 +22,9 @@ getTheme() async {
 
 /// Convert current ThemeMode into string to keep user preference
 ///
-/// @param ThemeMode themeMode
+/// @param dynamic themeMode
 /// @return String
-_themeToString(ThemeMode themeMode) {
+_themeToString(themeMode) {
   switch (themeMode) {
     case ThemeMode.light:
       return 'light';
@@ -37,9 +37,9 @@ _themeToString(ThemeMode themeMode) {
 
 /// Convert string from storage into ThemeMode class
 ///
-/// @param String stringThemeMode
+/// @param dynamic stringThemeMode
 /// @return ThemeMode instance
-_stringToTheme(String stringThemeMode) {
+_stringToTheme(stringThemeMode) {
   // return default system if value not match
   switch (stringThemeMode) {
     case 'light':
