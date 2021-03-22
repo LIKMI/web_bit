@@ -85,9 +85,35 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context).bottomAppBarColor;
-    return Container(
-      color: themeData,
-      child: FlutterLogo(size: MediaQuery.of(context).size.height),
+    final textTheme = Theme.of(context).textTheme;
+    var screenSize = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: Container(
+        color: themeData,
+        child: Column(
+          children: [
+            Flexible(
+              flex: 3,
+              child: Align(
+                alignment: Alignment.center,
+                child: FlutterLogo(size: screenSize.height / 5),
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('created by', style: textTheme.bodyText1),
+                  Text('BIT-LIKMI', style: textTheme.headline1)
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -19,7 +19,7 @@ TextStyle get titleTextStyle => TextStyle(
 ThemeData get lightTheme => ThemeData(
       textTheme: TextTheme(
         // Appbar Title
-        subtitle1: TextStyle(
+        headline1: TextStyle(
           fontFamily: 'Proxima Nova',
           color: Colors.blueGrey,
           fontSize: 20,
@@ -27,20 +27,25 @@ ThemeData get lightTheme => ThemeData(
           letterSpacing: 3,
         ),
         // Menu
-        subtitle2: TextStyle(
-          fontFamily: 'Proxima Nova',
-          fontSize: 16.0,
-          fontWeight: FontWeight.w600,
-          color: Colors.blueGrey,
-          decorationColor: Colors.red
-        ),
+        headline2: TextStyle(
+            fontFamily: 'Proxima Nova',
+            fontSize: 16.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.blueGrey,
+            decorationColor: Colors.red),
         // Button
         button: TextStyle(
+            fontFamily: 'Proxima Nova',
+            fontSize: 16.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            decorationColor: Colors.red),
+        //Body Text 1
+        bodyText1: TextStyle(
           fontFamily: 'Proxima Nova',
           fontSize: 16.0,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
-          decorationColor: Colors.red
+          fontWeight: FontWeight.w400,
+          color: Colors.blueGrey,
         ),
       ),
       // Toggle button
@@ -65,7 +70,7 @@ ThemeData get lightTheme => ThemeData(
         ),
         headline1: TextStyle(color: Colors.blueGrey[800]),
       ),
-      bottomAppBarColor: Color(0xFFE6E6E6),
+      bottomAppBarColor: Color(0xFFF7F7F7),
       iconTheme: IconThemeData(color: Colors.blueGrey),
     );
 
@@ -73,7 +78,7 @@ ThemeData get lightTheme => ThemeData(
 ThemeData get darkTheme => ThemeData(
       textTheme: TextTheme(
         // Appbar Title
-        subtitle1: TextStyle(
+        headline1: TextStyle(
           fontFamily: 'Proxima Nova',
           color: Colors.white,
           fontSize: 20,
@@ -81,20 +86,25 @@ ThemeData get darkTheme => ThemeData(
           letterSpacing: 3,
         ),
         // Menu
-        subtitle2: TextStyle(
-          fontFamily: 'Proxima Nova',
-          fontSize: 16.0,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
-          decorationColor: Colors.red
-        ),
+        headline2: TextStyle(
+            fontFamily: 'Proxima Nova',
+            fontSize: 16.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            decorationColor: Colors.red),
         // Button
         button: TextStyle(
+            fontFamily: 'Proxima Nova',
+            fontSize: 16.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            decorationColor: Colors.red),
+        //Body Text 1
+        bodyText1: TextStyle(
           fontFamily: 'Proxima Nova',
           fontSize: 16.0,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w400,
           color: Colors.white,
-          decorationColor: Colors.red
         ),
       ),
       // Toggle button
@@ -119,7 +129,7 @@ ThemeData get darkTheme => ThemeData(
         ),
         headline1: TextStyle(color: Colors.blueGrey[800]),
       ),
-      
+
       bottomAppBarColor: Colors.blueGrey[900],
       iconTheme: IconThemeData(color: Colors.blueGrey),
     );
