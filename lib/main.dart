@@ -9,9 +9,9 @@ import 'package:web_bit/utils/theme_manager.dart';
 
 import 'screens/home_page.dart';
 
-void main() {
+void main() async{
   // Preload data on first launch
-  getTheme();
+  await getTheme();
   runApp(
     // Enable riverpod provider
     ProviderScope(child: MyApp()),

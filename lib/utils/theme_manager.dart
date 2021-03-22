@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:web_bit/utils/storage_manager.dart';
 
 /// Global Value
-late ThemeMode currentTheme;
+late ThemeMode currentTheme = ThemeMode.system;
 
 /// Save theme mode applied on rebuild main to user preference
 ///
