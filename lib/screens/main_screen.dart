@@ -176,7 +176,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         child: imageUrl == null
                             ? Icon(
                                 Icons.account_circle,
-                                size: 500,
+                                size: 30,
                               )
                             : SizedBox.shrink(),
                       ),
