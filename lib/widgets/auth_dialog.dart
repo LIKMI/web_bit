@@ -1,7 +1,7 @@
-import 'package:web_bit/screens/home_page.dart';
+import 'package:web_bit/screens/main_screen.dart';
 import 'package:web_bit/utils/authentication.dart';
 import 'package:flutter/material.dart';
-import 'package:web_bit/utils/theme/theme_data.dart';
+import 'package:web_bit/utils/theme_data.dart';
 
 import 'google_sign_in_button.dart';
 
@@ -28,7 +28,7 @@ class _AuthDialogState extends State<AuthDialog> {
   String? _validateEmail(String value) {
     value = value.trim();
 
-    if (textControllerEmail.text != null) {
+    if (textControllerEmail.text != '') {
       if (value.isEmpty) {
         return 'Email can\'t be empty';
       } else if (!value.contains(RegExp(
@@ -43,7 +43,7 @@ class _AuthDialogState extends State<AuthDialog> {
   String? _validatePassword(String value) {
     value = value.trim();
 
-    if (textControllerEmail.text != null) {
+    if (textControllerEmail.text != '') {
       if (value.isEmpty) {
         return 'Password can\'t be empty';
       } else if (value.length < 6) {
@@ -232,10 +232,7 @@ class _AuthDialogState extends State<AuthDialog> {
                         flex: 1,
                         child: Container(
                           width: double.maxFinite,
-                          child: FlatButton(
-                            color: Colors.blueGrey[800],
-                            hoverColor: Colors.blueGrey[900],
-                            highlightColor: Colors.black,
+                          child: TextButton(
                             onPressed: () async {
                               setState(() {
                                 _isLoggingIn = true;
@@ -264,7 +261,7 @@ class _AuthDialogState extends State<AuthDialog> {
                                       Navigator.of(context)
                                           .pushReplacement(MaterialPageRoute(
                                         fullscreenDialog: true,
-                                        builder: (context) => HomePage(),
+                                        builder: (context) => MainScreen(),
                                       ));
                                     });
                                   }
@@ -290,9 +287,6 @@ class _AuthDialogState extends State<AuthDialog> {
                                 _isEditingPassword = false;
                               });
                             },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
                             child: Padding(
                               padding: EdgeInsets.only(
                                 top: 15.0,
@@ -326,10 +320,7 @@ class _AuthDialogState extends State<AuthDialog> {
                         flex: 1,
                         child: Container(
                           width: double.maxFinite,
-                          child: FlatButton(
-                            color: Colors.blueGrey[800],
-                            hoverColor: Colors.blueGrey[900],
-                            highlightColor: Colors.black,
+                          child: TextButton(
                             onPressed: () async {
                               setState(() {
                                 textFocusNodeEmail.unfocus();
@@ -378,9 +369,6 @@ class _AuthDialogState extends State<AuthDialog> {
                                 _isEditingPassword = false;
                               });
                             },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
                             child: Padding(
                               padding: EdgeInsets.only(
                                 top: 15.0,
@@ -412,7 +400,7 @@ class _AuthDialogState extends State<AuthDialog> {
                     ],
                   ),
                 ),
-                loginStatus != null
+                loginStatus != ''
                     ? Center(
                         child: Padding(
                           padding: const EdgeInsets.only(
