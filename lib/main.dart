@@ -7,7 +7,7 @@ import 'package:web_bit/utils/authentication.dart';
 import 'package:web_bit/utils/theme_data.dart';
 import 'package:web_bit/utils/theme_manager.dart';
 
-import 'screens/home_page.dart';
+import 'screens/main_screen.dart';
 
 void main() async{
   // Preload first launch theme data before attach to screen
@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => MainScreen(),
         ),
       ),
     );

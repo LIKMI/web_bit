@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web_bit/providers/providers_global.dart';
 import 'package:web_bit/utils/authentication.dart';
 import 'package:web_bit/widgets/auth_dialog.dart';
-import 'package:web_bit/screens/home_page.dart';
+import 'package:web_bit/screens/main_screen.dart';
 import 'package:web_bit/utils/theme_data.dart';
 import 'package:web_bit/widgets/flat_button.dart';
 import 'package:web_bit/widgets/theme_mode_switch.dart';
@@ -37,7 +37,17 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      color: Theme.of(context).bottomAppBarColor.withOpacity(widget.opacity),
+      decoration: BoxDecoration(
+          color:
+              Theme.of(context).bottomAppBarColor.withOpacity(widget.opacity),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).shadowColor,
+              spreadRadius: 6,
+              blurRadius: 6,
+              offset: Offset(0, -4),
+            )
+          ]),
       child: Padding(
         padding: EdgeInsets.all(20),
         child: Row(
@@ -209,7 +219,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                                   Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       fullscreenDialog: true,
-                                      builder: (context) => HomePage(),
+                                      builder: (context) => MainScreen(),
                                     ),
                                   );
                                 }).catchError((error) {

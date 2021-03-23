@@ -58,7 +58,9 @@ ThemeData get lightTheme => ThemeData(
       ),
       //Floating action button
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.blueGrey, backgroundColor: Color(0xFFEBEBEB)),
+          foregroundColor: Colors.white, backgroundColor: Colors.red),
+      //Shadow color
+      shadowColor: Colors.grey.withOpacity(0.4),
       primarySwatch: Colors.red,
       backgroundColor: Colors.white,
       cardColor: Colors.blueGrey[50],
@@ -73,7 +75,7 @@ ThemeData get lightTheme => ThemeData(
         ),
         headline1: TextStyle(color: Colors.blueGrey[800]),
       ),
-      bottomAppBarColor: Color(0xFFEBEBEB),
+      bottomAppBarColor: Colors.white,
       iconTheme: IconThemeData(color: Colors.blueGrey),
     );
 
@@ -121,6 +123,8 @@ ThemeData get darkTheme => ThemeData(
       //Floating action button
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           foregroundColor: Colors.white, backgroundColor: Colors.blueGrey[900]),
+      //Shadow color
+      shadowColor: Colors.black87,
       primarySwatch: Colors.blueGrey,
       backgroundColor: Colors.blueGrey,
       cardColor: Colors.blueGrey[50],

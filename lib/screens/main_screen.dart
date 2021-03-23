@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:web_bit/utils/theme_data.dart';
+import 'package:web_bit/widgets/flat_button.dart';
 import 'package:web_bit/widgets/responsive.dart';
 import 'package:web_bit/widgets/header_menu_contents.dart';
 
-class HomePage extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   static const String route = '/';
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late ScrollController _scrollController;
-  double _scrollPosition = 0;
-  double _opacity = 0;
+  double _scrollPosition = 0; // Turn off opacity on scroll (default 0)
+  double _opacity = 1; // Turn off opacity on scroll (default 0)
 
   _scrollListener() {
     setState(() {
       _scrollPosition = _scrollController.position.pixels;
     });
+  }
+
+  void _openDrawer() {
+    _scaffoldKey.currentState!.openDrawer();
+  }
+
+  void _closeDrawer() {
+    Navigator.of(context).pop();
   }
 
   @override
@@ -47,15 +57,16 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     var screenSize = MediaQuery.of(context).size;
-    // Turn off opacity on scroll
+    // Turn off opacity on scroll (default used)
     // _opacity = _scrollPosition < screenSize.height * 0.30
     //     ? _scrollPosition / (screenSize.height * 0.30)
     //     : 1;
-    _opacity = 1;
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
-      extendBodyBehindAppBar: false, // Turn off opacity on scroll
+      extendBodyBehindAppBar:
+          false, // Turn off opacity on scroll (default true)
       appBar: ResponsiveWidget.isSmallScreen(context)
           ? AppBar(
               iconTheme: IconThemeData(
@@ -63,7 +74,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ),
               backgroundColor:
                   Theme.of(context).bottomAppBarColor.withOpacity(_opacity),
-              elevation: 0,
+              elevation: 6,
+              shadowColor: Theme.of(context).shadowColor,
               automaticallyImplyLeading: false,
               title: Row(
                 children: [
@@ -120,10 +132,57 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                child: Text('Drawer Header'),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          flex: 4,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Account', style: textTheme.headline2),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 3,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  flex: 2,
+                                  child: CustomFlatButton(
+                                    childWidget: Text(
+                                      'Login',
+                                      style: textTheme.button,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Flexible(
+                                  flex: 1,
+                                  child: CustomFlatButton(
+                                    childWidget: Icon(
+                                      Icons.close,
+                                      color: textTheme.button!.color,
+                                    ),
+                                    onPressed: () => _closeDrawer(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
                 decoration: BoxDecoration(
                   color: Theme.of(context).bottomAppBarColor,
                 ),
+              ),
+              ListTile(
+                title: Text('Menu', style: textTheme.headline2),
               ),
               ListTile(
                 title: Text('Item 1'),
@@ -141,11 +200,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Scaffold.of(context).openDrawer();
+          _openDrawer();
         },
-        child: const Icon(Icons.menu),
+        label: Text('Menu'),
+        icon: Icon(Icons.menu),
       ),
     );
   }

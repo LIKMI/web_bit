@@ -1,4 +1,4 @@
-import 'package:web_bit/screens/home_page.dart';
+import 'package:web_bit/screens/main_screen.dart';
 import 'package:web_bit/utils/authentication.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +32,7 @@ class _GoogleButtonState extends State<GoogleButton> {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   fullscreenDialog: true,
-                  builder: (context) => HomePage(),
+                  builder: (context) => MainScreen(),
                 ),
               );
             }
