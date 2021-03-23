@@ -209,6 +209,80 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   Navigator.pop(context);
                 },
               ),
+              Center(
+                child: userEmail == null
+                    ? CustomFlatButton(
+                        textStyle: textTheme.button,
+                        onPressed: userEmail == null
+                            ? () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AuthDialog(),
+                                );
+                              }
+                            : null,
+                        childWidget: Text(
+                          'Sign in',
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 15,
+                            backgroundImage: imageUrl != null
+                                ? NetworkImage(imageUrl!)
+                                : null,
+                            child: imageUrl == null
+                                ? Icon(
+                                    Icons.account_circle,
+                                    size: 30,
+                                  )
+                                : Container(),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            (name ?? userEmail)!,
+                            style: textTheme.headline2,
+                          ),
+                          SizedBox(width: 10),
+                          CustomFlatButton(
+                            textStyle: textTheme.button,
+                            onPressed: _isProcessing
+                                ? null
+                                : () async {
+                                    setState(() {
+                                      _isProcessing = true;
+                                    });
+                                    await signOut().then((result) {
+                                      print(result);
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          fullscreenDialog: true,
+                                          builder: (context) => MainScreen(),
+                                        ),
+                                      );
+                                    }).catchError((error) {
+                                      print('Sign Out Error: $error');
+                                    });
+                                    setState(() {
+                                      _isProcessing = false;
+                                    });
+                                  },
+                            childWidget: Padding(
+                              padding: EdgeInsets.only(
+                                top: 8.0,
+                                bottom: 8.0,
+                              ),
+                              child: _isProcessing
+                                  ? CircularProgressIndicator(
+                                      backgroundColor: textTheme.button!.color,
+                                    )
+                                  : Text('Sign out'),
+                            ),
+                          ),
+                        ],
+                      ),
+              ),
             ],
           ),
         ),
