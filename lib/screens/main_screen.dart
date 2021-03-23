@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:web_bit/utils/authentication.dart';
 import 'package:web_bit/utils/theme_data.dart';
+import 'package:web_bit/widgets/auth_dialog.dart';
 import 'package:web_bit/widgets/flat_button.dart';
 import 'package:web_bit/widgets/responsive.dart';
 import 'package:web_bit/widgets/header_menu_contents.dart';
@@ -16,6 +18,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   late ScrollController _scrollController;
   double _scrollPosition = 0; // Turn off opacity on scroll (default 0)
   double _opacity = 1; // Turn off opacity on scroll (default 0)
+  bool _isProcessing = false;
 
   _scrollListener() {
     setState(() {
@@ -134,47 +137,57 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
               DrawerHeader(
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          flex: 4,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text('Account', style: textTheme.headline2),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  flex: 2,
-                                  child: CustomFlatButton(
-                                    childWidget: Text(
-                                      'Login',
-                                      style: textTheme.button,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 5),
-                                Flexible(
-                                  flex: 1,
-                                  child: CustomFlatButton(
-                                    childWidget: Icon(
-                                      Icons.close,
-                                      color: textTheme.button!.color,
-                                    ),
-                                    onPressed: () => _closeDrawer(),
-                                  ),
-                                ),
-                              ],
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child:
+                                  Text('Account', style: textTheme.headline2),
                             ),
                           ),
-                        )
-                      ],
+                          Flexible(
+                            flex: 1,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: GestureDetector(
+                                child: Icon(
+                                  Icons.close,
+                                  color: textTheme.headline2!.color,
+                                ),
+                                onTap: () => _closeDrawer(),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
+                    SizedBox(height: 10),
+                    Expanded(
+                      flex: 3,
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: userEmail != null && imageUrl != null
+                            ? NetworkImage(imageUrl!)
+                            : null,
+                        child: imageUrl == null
+                            ? Icon(
+                                Icons.account_circle,
+                                size: 500,
+                              )
+                            : SizedBox.shrink(),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        userEmail == null ? 'Guest' : (name ?? userEmail)!,
+                        style: textTheme.headline2,
+                      ),
+                    )
                   ],
                 ),
                 decoration: BoxDecoration(
@@ -204,8 +217,14 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         onPressed: () {
           _openDrawer();
         },
-        label: Text('Menu'),
-        icon: Icon(Icons.menu),
+        label: Text(
+          'Menu',
+          style: textTheme.button,
+        ),
+        icon: Icon(
+          Icons.menu,
+          size: textTheme.button!.fontSize,
+        ),
       ),
     );
   }

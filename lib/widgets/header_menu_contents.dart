@@ -196,14 +196,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                       SizedBox(width: 5),
                       Text(
                         (name ?? userEmail)!,
-                        style: TextStyle(
-                          fontFamily: textTheme.headline2!.fontFamily,
-                          fontWeight: textTheme.headline2!.fontWeight,
-                          fontSize: textTheme.headline2!.fontSize,
-                          color: _isHovering[3]
-                              ? textTheme.headline2!.decorationColor
-                              : textTheme.headline2!.color,
-                        ),
+                        style: textTheme.headline2,
                       ),
                       SizedBox(width: 10),
                       CustomFlatButton(
