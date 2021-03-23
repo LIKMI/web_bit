@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,7 +13,7 @@ jobs:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "2.0.1" # Targeted version
+          flutter-version: "2.0.2" # Targeted version
           channel: "stable"
       - name: Upgrades flutter
         run: flutter upgrade
