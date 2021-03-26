@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_bit/utils/custom_colors.dart';
 
 // Name of the application
 const String websiteTitle = 'WEB-BIT';
@@ -21,62 +22,54 @@ ThemeData get lightTheme => ThemeData(
         // Appbar Title
         headline1: TextStyle(
           fontFamily: 'Proxima Nova',
-          color: Colors.blueGrey,
+          color: HEADER2_PRIMARY,
           fontSize: 20,
           fontWeight: FontWeight.w600,
           letterSpacing: 3,
         ),
         // Menu
         headline2: TextStyle(
-            fontFamily: 'Proxima Nova',
-            fontSize: 16.0,
-            fontWeight: FontWeight.w600,
-            color: Colors.blueGrey,
-            decorationColor: Colors.red),
+          fontFamily: 'Proxima Nova',
+          fontSize: 16.0,
+          fontWeight: FontWeight.w600,
+          color: HEADER2_PRIMARY,
+          decorationColor: MAIN_RED,
+        ),
         // Button
         button: TextStyle(
-            fontFamily: 'Proxima Nova',
-            fontSize: 16.0,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            decorationColor: Colors.red),
+          fontFamily: 'Proxima Nova',
+          fontSize: 16.0,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+          decorationColor: MAIN_RED,
+        ),
         //Body Text 1
         bodyText1: TextStyle(
           fontFamily: 'Proxima Nova',
           fontSize: 16.0,
           fontWeight: FontWeight.w400,
-          color: Colors.blueGrey,
+          color: HEADER2_PRIMARY,
         ),
       ),
       // Toggle button
       toggleButtonsTheme: ToggleButtonsThemeData(
         selectedColor: Colors.white,
-        color: Colors.blueGrey,
-        fillColor: Colors.red,
+        color: HEADER2_PRIMARY,
+        fillColor: MAIN_RED,
         splashColor: Colors.transparent,
         hoverColor: Colors.transparent,
       ),
       //Floating action button
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.white, backgroundColor: Colors.red),
+          foregroundColor: Colors.white, backgroundColor: MAIN_RED),
       //Shadow color
       shadowColor: Colors.grey.withOpacity(0.4),
-      primarySwatch: Colors.red,
-      backgroundColor: Colors.white,
-      cardColor: Colors.blueGrey[50],
-      primaryTextTheme: TextTheme(
-        button: TextStyle(
-          color: Colors.blueGrey,
-          decorationColor: Colors.blueGrey[300],
-        ),
-        subtitle1: TextStyle(
-          color: Colors.black,
-          decorationColor: Colors.blue[200],
-        ),
-        headline1: TextStyle(color: Colors.blueGrey[800]),
-      ),
-      bottomAppBarColor: Colors.white,
-      iconTheme: IconThemeData(color: Colors.blueGrey),
+      //Statusbar and default element material
+      primarySwatch: Colors.grey,
+      //Background app
+      backgroundColor: BACKGROUND_LIGHT,
+      //Bottom appbar
+      bottomAppBarColor: Colors.grey[50],
     );
 
 // Dark Theme
@@ -92,18 +85,20 @@ ThemeData get darkTheme => ThemeData(
         ),
         // Menu
         headline2: TextStyle(
-            fontFamily: 'Proxima Nova',
-            fontSize: 16.0,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            decorationColor: Colors.red),
+          fontFamily: 'Proxima Nova',
+          fontSize: 16.0,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+          decorationColor: MAIN_RED,
+        ),
         // Button
         button: TextStyle(
-            fontFamily: 'Proxima Nova',
-            fontSize: 16.0,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            decorationColor: Colors.red),
+          fontFamily: 'Proxima Nova',
+          fontSize: 16.0,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+          decorationColor: MAIN_RED,
+        ),
         //Body Text 1
         bodyText1: TextStyle(
           fontFamily: 'Proxima Nova',
@@ -122,24 +117,15 @@ ThemeData get darkTheme => ThemeData(
       ),
       //Floating action button
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.white, backgroundColor: Colors.blueGrey[900]),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.blueGrey[900],
+      ),
       //Shadow color
       shadowColor: Colors.black87,
-      primarySwatch: Colors.blueGrey,
+      //Statusbar and default element material
+      primarySwatch: Colors.grey,
+      //Background app
       backgroundColor: Colors.blueGrey,
-      cardColor: Colors.blueGrey[50],
-      primaryTextTheme: TextTheme(
-        button: TextStyle(
-          color: Colors.white,
-          decorationColor: Colors.blueGrey[300],
-        ),
-        subtitle1: TextStyle(
-          color: Colors.white,
-          decorationColor: Colors.blue[200],
-        ),
-        headline1: TextStyle(color: Colors.blueGrey[800]),
-      ),
-
+      //Bottom appbar
       bottomAppBarColor: Colors.blueGrey[900],
-      iconTheme: IconThemeData(color: Colors.blueGrey),
     );

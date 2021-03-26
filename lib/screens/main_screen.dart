@@ -1,5 +1,8 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:web_bit/utils/authentication.dart';
+import 'package:web_bit/utils/custom_colors.dart';
 import 'package:web_bit/utils/theme_data.dart';
 import 'package:web_bit/widgets/auth_dialog.dart';
 import 'package:web_bit/widgets/flat_button.dart';
@@ -28,10 +31,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
 
   void _openDrawer() {
     _scaffoldKey.currentState!.openDrawer();
-  }
-
-  void _closeDrawer() {
-    Navigator.of(context).pop();
   }
 
   @override
@@ -79,12 +78,22 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   Theme.of(context).bottomAppBarColor.withOpacity(_opacity),
               elevation: 6,
               shadowColor: Theme.of(context).shadowColor,
-              automaticallyImplyLeading: false,
-              title: Row(
-                children: [
-                  FlutterLogo(),
-                  Text(homeTitle, style: textTheme.headline1),
-                ],
+              leading: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: () => _openDrawer(),
+                ),
+              ),
+              titleSpacing: 5,
+              title: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  children: [
+                    FlutterLogo(),
+                    Text(homeTitle, style: textTheme.headline1),
+                  ],
+                ),
               ),
             )
           : PreferredSize(
@@ -130,176 +139,297 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
       drawer: Drawer(
         child: Container(
           color: Theme.of(context).backgroundColor,
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child:
-                                  Text('Account', style: textTheme.headline2),
-                            ),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
-                                child: Icon(
-                                  Icons.close,
-                                  color: textTheme.headline2!.color,
-                                ),
-                                onTap: () => _closeDrawer(),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Expanded(
-                      flex: 3,
-                      child: CircleAvatar(
-                        radius: 30,
-                        backgroundImage: userEmail != null && imageUrl != null
-                            ? NetworkImage(imageUrl!)
-                            : null,
-                        child: imageUrl == null
-                            ? Icon(
-                                Icons.account_circle,
-                                size: 30,
-                              )
-                            : SizedBox.shrink(),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        userEmail == null ? 'Guest' : (name ?? userEmail)!,
-                        style: textTheme.headline2,
-                      ),
-                    )
-                  ],
-                ),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).bottomAppBarColor,
-                ),
+          child: Column(
+            children: [
+              Flexible(
+                flex: 3,
+                child: DrawerHeaderMain(),
               ),
-              ListTile(
-                title: Text('Menu', style: textTheme.headline2),
+              Flexible(
+                flex: 6,
+                child: DrawerMain(),
               ),
-              ListTile(
-                title: Text('Item 1'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Item 2'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              Center(
-                child: userEmail == null
-                    ? CustomFlatButton(
-                        textStyle: textTheme.button,
-                        onPressed: userEmail == null
-                            ? () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AuthDialog(),
-                                );
-                              }
-                            : null,
-                        childWidget: Text(
-                          'Sign in',
-                        ),
-                      )
-                    : Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundImage: imageUrl != null
-                                ? NetworkImage(imageUrl!)
-                                : null,
-                            child: imageUrl == null
-                                ? Icon(
-                                    Icons.account_circle,
-                                    size: 30,
-                                  )
-                                : Container(),
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            (name ?? userEmail)!,
-                            style: textTheme.headline2,
-                          ),
-                          SizedBox(width: 10),
-                          CustomFlatButton(
-                            textStyle: textTheme.button,
-                            onPressed: _isProcessing
-                                ? null
-                                : () async {
-                                    setState(() {
-                                      _isProcessing = true;
-                                    });
-                                    await signOut().then((result) {
-                                      print(result);
-                                      Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                          fullscreenDialog: true,
-                                          builder: (context) => MainScreen(),
-                                        ),
-                                      );
-                                    }).catchError((error) {
-                                      print('Sign Out Error: $error');
-                                    });
-                                    setState(() {
-                                      _isProcessing = false;
-                                    });
-                                  },
-                            childWidget: Padding(
-                              padding: EdgeInsets.only(
-                                top: 8.0,
-                                bottom: 8.0,
-                              ),
-                              child: _isProcessing
-                                  ? CircularProgressIndicator(
-                                      backgroundColor: textTheme.button!.color,
-                                    )
-                                  : Text('Sign out'),
-                            ),
-                          ),
-                        ],
-                      ),
-              ),
+              Flexible(flex: 1, child: DrawerFooter())
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          _openDrawer();
-        },
-        label: Text(
-          'Menu',
-          style: textTheme.button,
-        ),
-        icon: Icon(
-          Icons.menu,
-          size: textTheme.button!.fontSize,
-        ),
+      floatingActionButton: (ResponsiveWidget.isMediumScreen(context) ||
+              ResponsiveWidget.isLargeScreen(context))
+          ? FittedBox(
+              fit: BoxFit.scaleDown,
+              child: FloatingActionButton.extended(
+                onPressed: () {
+                  _openDrawer();
+                },
+                label: Text(
+                  'Menu',
+                  style: textTheme.button,
+                ),
+                icon: Icon(
+                  Icons.menu,
+                  size: textTheme.button!.fontSize,
+                ),
+              ),
+            )
+          : SizedBox.shrink(),
+    );
+  }
+}
+
+class DrawerHeaderMain extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return DrawerHeader(
+      margin: EdgeInsets.zero,
+      child: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Row(
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Account', style: textTheme.headline2),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      child: Icon(
+                        Icons.close,
+                        color: textTheme.headline2!.color,
+                      ),
+                      onTap: () => Navigator.of(context).pop(),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Expanded(
+            flex: 3,
+            child: CircleAvatar(
+              radius: 30,
+              backgroundImage: userEmail != null && imageUrl != null
+                  ? NetworkImage(imageUrl!)
+                  : null,
+              child: imageUrl == null
+                  ? Icon(
+                      Icons.account_circle,
+                      size: 30,
+                    )
+                  : SizedBox.shrink(),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              userEmail == null ? 'Guest' : (name ?? userEmail)!,
+              style: textTheme.headline2,
+            ),
+          )
+        ],
       ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).bottomAppBarColor,
+      ),
+    );
+  }
+}
+
+class DrawerMain extends StatefulWidget {
+  @override
+  _DrawerMainState createState() => _DrawerMainState();
+}
+
+class _DrawerMainState extends State<DrawerMain> {
+  final List _isHovering = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Scrollbar(
+      isAlwaysShown: true,
+      child: ListView(
+        padding: EdgeInsets.only(top: 5),
+        children: [
+          MouseRegion(
+            onHover: (event) {
+              setState(() {
+                _isHovering[0] = true;
+              });
+            },
+            onExit: (event) {
+              setState(() {
+                _isHovering[0] = false;
+              });
+            },
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              color: Theme.of(context).bottomAppBarColor,
+              child: ListTile(
+                hoverColor: textTheme.headline2!.decorationColor,
+                enableFeedback: true,
+                title: Text(
+                  'Recent Project',
+                  style: TextStyle(
+                    fontFamily: textTheme.headline2!.fontFamily,
+                    fontWeight: textTheme.headline2!.fontWeight,
+                    fontSize: textTheme.headline2!.fontSize,
+                    color: _isHovering[0] ? WHITE : textTheme.headline2!.color,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.important_devices_rounded,
+                  color: textTheme.headline2!.color,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ),
+          MouseRegion(
+            onHover: (event) {
+              setState(() {
+                _isHovering[1] = true;
+              });
+            },
+            onExit: (event) {
+              setState(() {
+                _isHovering[1] = false;
+              });
+            },
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              color: Theme.of(context).bottomAppBarColor,
+              child: ListTile(
+                hoverColor: textTheme.headline2!.decorationColor,
+                enableFeedback: true,
+                title: Text('Contribute', style: textTheme.headline2),
+                trailing: Icon(
+                  Icons.group_add_rounded,
+                  color: textTheme.headline2!.color,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ),
+          MouseRegion(
+            onHover: (event) {
+              setState(() {
+                _isHovering[2] = true;
+              });
+            },
+            onExit: (event) {
+              setState(() {
+                _isHovering[2] = false;
+              });
+            },
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              color: Theme.of(context).bottomAppBarColor,
+              child: ListTile(
+                hoverColor: textTheme.headline2!.decorationColor,
+                enableFeedback: true,
+                title: Text('Internship', style: textTheme.headline2),
+                trailing: Icon(
+                  Icons.badge,
+                  color: textTheme.headline2!.color,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DrawerFooter extends StatefulWidget {
+  @override
+  _DrawerFooterState createState() => _DrawerFooterState();
+}
+
+class _DrawerFooterState extends State<DrawerFooter> {
+  bool _isProcessing = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return Container(
+      child: userEmail == null
+          ? CustomFlatButton(
+              textStyle: textTheme.button,
+              onPressed: userEmail == null
+                  ? () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AuthDialog(),
+                      );
+                    }
+                  : null,
+              childWidget: Text(
+                'Sign in',
+              ),
+            )
+          : CustomFlatButton(
+              textStyle: textTheme.button,
+              onPressed: _isProcessing
+                  ? null
+                  : () async {
+                      setState(() {
+                        _isProcessing = true;
+                      });
+                      await signOut().then((result) {
+                        print(result);
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (context) => MainScreen(),
+                          ),
+                        );
+                      }).catchError((error) {
+                        print('Sign Out Error: $error');
+                      });
+                      setState(() {
+                        _isProcessing = false;
+                      });
+                    },
+              childWidget: Padding(
+                padding: EdgeInsets.only(
+                  top: 8.0,
+                  bottom: 8.0,
+                ),
+                child: _isProcessing
+                    ? CircularProgressIndicator(
+                        backgroundColor: textTheme.button!.color,
+                      )
+                    : Text('Sign out'),
+              ),
+            ),
     );
   }
 }
