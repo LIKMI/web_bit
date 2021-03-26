@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:web_bit/models/menu_model.dart';
 import 'package:web_bit/utils/authentication.dart';
 import 'package:web_bit/utils/custom_colors.dart';
 import 'package:web_bit/utils/theme_data.dart';
@@ -250,16 +251,7 @@ class DrawerMain extends StatefulWidget {
 }
 
 class _DrawerMainState extends State<DrawerMain> {
-  final List _isHovering = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
+  int _indexNow = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -267,102 +259,50 @@ class _DrawerMainState extends State<DrawerMain> {
 
     return Scrollbar(
       isAlwaysShown: true,
-      child: ListView(
+      child: ListView.builder(
         padding: EdgeInsets.only(top: 5),
-        children: [
-          MouseRegion(
+        itemCount: menuModel.length,
+        itemBuilder: (context, index) {
+          return MouseRegion(
             onHover: (event) {
               setState(() {
-                _isHovering[0] = true;
+                _indexNow = index;
               });
             },
             onExit: (event) {
               setState(() {
-                _isHovering[0] = false;
+                _indexNow = -1;
               });
             },
             child: Card(
               clipBehavior: Clip.antiAlias,
               color: Theme.of(context).bottomAppBarColor,
               child: ListTile(
-                hoverColor: textTheme.headline2!.decorationColor,
+                tileColor: _indexNow == index
+                    ? textTheme.headline2!.decorationColor
+                    : WHITE,
                 enableFeedback: true,
-                title: Text(
-                  'Recent Project',
-                  style: TextStyle(
-                    fontFamily: textTheme.headline2!.fontFamily,
-                    fontWeight: textTheme.headline2!.fontWeight,
-                    fontSize: textTheme.headline2!.fontSize,
-                    color: _isHovering[0] ? WHITE : textTheme.headline2!.color,
-                  ),
-                ),
+                title: Text(menuModel[index].title,
+                    style: TextStyle(
+                      fontFamily: textTheme.headline2!.fontFamily,
+                      fontWeight: textTheme.headline2!.fontWeight,
+                      fontSize: textTheme.headline2!.fontSize,
+                      color: _indexNow == index
+                          ? WHITE
+                          : textTheme.headline2!.color,
+                    )),
                 trailing: Icon(
-                  Icons.important_devices_rounded,
-                  color: textTheme.headline2!.color,
+                  menuModel[index].icon,
+                  color:
+                      _indexNow == index ? WHITE : textTheme.headline2!.color,
                 ),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
             ),
-          ),
-          MouseRegion(
-            onHover: (event) {
-              setState(() {
-                _isHovering[1] = true;
-              });
-            },
-            onExit: (event) {
-              setState(() {
-                _isHovering[1] = false;
-              });
-            },
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              color: Theme.of(context).bottomAppBarColor,
-              child: ListTile(
-                hoverColor: textTheme.headline2!.decorationColor,
-                enableFeedback: true,
-                title: Text('Contribute', style: textTheme.headline2),
-                trailing: Icon(
-                  Icons.group_add_rounded,
-                  color: textTheme.headline2!.color,
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-          ),
-          MouseRegion(
-            onHover: (event) {
-              setState(() {
-                _isHovering[2] = true;
-              });
-            },
-            onExit: (event) {
-              setState(() {
-                _isHovering[2] = false;
-              });
-            },
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              color: Theme.of(context).bottomAppBarColor,
-              child: ListTile(
-                hoverColor: textTheme.headline2!.decorationColor,
-                enableFeedback: true,
-                title: Text('Internship', style: textTheme.headline2),
-                trailing: Icon(
-                  Icons.badge,
-                  color: textTheme.headline2!.color,
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
