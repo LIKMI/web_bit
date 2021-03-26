@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:web_bit/models/menu_model.dart';
@@ -297,7 +296,7 @@ class _DrawerMainState extends State<DrawerMain> {
                       _indexNow == index ? WHITE : textTheme.headline2!.color,
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, menuModel[index].routeName);
                 },
               ),
             ),

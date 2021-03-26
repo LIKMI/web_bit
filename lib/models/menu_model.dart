@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 class MenuModelClass {
   final dynamic icon;
   final String title;
-  final String? routeName;
-  final TextStyle? textStyle;
-  final TextStyle? hoverStyle;
-  final Color? hoverColor;
+  final String routeName;
 
   const MenuModelClass({
     this.icon,
     required this.title,
-    this.routeName,
-    this.textStyle,
-    this.hoverStyle,
-    this.hoverColor,
+    required this.routeName,
   });
 }
 
