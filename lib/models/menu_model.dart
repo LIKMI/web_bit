@@ -14,6 +14,10 @@ class MenuModelClass {
 
 List<MenuModelClass> menuModel = [
   MenuModelClass(
+      title: 'Home',
+      icon: Icons.home,
+      routeName: '/'),
+  MenuModelClass(
       title: 'Recent Project',
       icon: Icons.important_devices_rounded,
       routeName: '/Recent'),
