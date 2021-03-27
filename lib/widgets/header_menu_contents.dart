@@ -78,41 +78,47 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
                         _indexNow = -1;
                       });
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          flex: 2,
-                          child: Text(
-                            menuModel[index].title,
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.clip,
-                            style: TextStyle(
-                              fontFamily: textTheme.headline2!.fontFamily,
-                              fontWeight: textTheme.headline2!.fontWeight,
-                              fontSize: textTheme.headline2!.fontSize,
-                              color: _indexNow == index
-                                  ? textTheme.headline2!.decorationColor
-                                  : textTheme.headline2!.color,
+                    child: GestureDetector(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: Text(
+                              menuModel[index].title,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(
+                                fontFamily: textTheme.headline2!.fontFamily,
+                                fontWeight: textTheme.headline2!.fontWeight,
+                                fontSize: textTheme.headline2!.fontSize,
+                                color: _indexNow == index
+                                    ? textTheme.headline2!.decorationColor
+                                    : textTheme.headline2!.color,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 5),
-                        Flexible(
-                          flex: 1,
-                          child: Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _indexNow == index ? true : false,
-                            child: Container(
-                              height: 2,
-                              width: 20,
-                              color: textTheme.headline2!.decorationColor,
+                          SizedBox(height: 5),
+                          Flexible(
+                            flex: 1,
+                            child: Visibility(
+                              maintainAnimation: true,
+                              maintainState: true,
+                              maintainSize: true,
+                              visible: _indexNow == index ? true : false,
+                              child: Container(
+                                height: 2,
+                                width: 20,
+                                color: textTheme.headline2!.decorationColor,
+                              ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, menuModel[index].routeName);
+                      },
                     ),
                   );
                 },
