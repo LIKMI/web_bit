@@ -16,12 +16,11 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
+class _MainScreenState extends State<MainScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late ScrollController _scrollController;
   double _scrollPosition = 0; // Turn off opacity on scroll (default 0)
   double _opacity = 1; // Turn off opacity on scroll (default 0)
-  bool _isProcessing = false;
 
   _scrollListener() {
     setState(() {
@@ -35,7 +34,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addObserver(this);
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
     super.initState();
@@ -43,16 +41,8 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
     _scrollController.dispose();
     super.dispose();
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    final Brightness brightness =
-        WidgetsBinding.instance!.window.platformBrightness;
-    //inform listeners and rebuild widget tree *Not Implemented
   }
 
   @override
@@ -97,7 +87,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
               ),
             )
           : PreferredSize(
-              preferredSize: Size(screenSize.width, 1000),
+              preferredSize: Size(screenSize.width, screenSize.height / 8),
               child: HeaderMenuContents(_opacity),
             ),
       body: Container(
@@ -279,7 +269,7 @@ class _DrawerMainState extends State<DrawerMain> {
               child: ListTile(
                 tileColor: _indexNow == index
                     ? textTheme.headline2!.decorationColor
-                    : WHITE,
+                    : Theme.of(context).bottomAppBarColor,
                 enableFeedback: true,
                 title: Text(menuModel[index].title,
                     style: TextStyle(

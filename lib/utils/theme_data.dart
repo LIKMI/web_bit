@@ -23,9 +23,9 @@ ThemeData get lightTheme => ThemeData(
         headline1: TextStyle(
           fontFamily: 'Proxima Nova',
           color: HEADER2_PRIMARY,
-          fontSize: 20,
+          fontSize: 25,
           fontWeight: FontWeight.w600,
-          letterSpacing: 3,
+          letterSpacing: 2,
         ),
         // Menu
         headline2: TextStyle(
@@ -78,10 +78,10 @@ ThemeData get darkTheme => ThemeData(
         // Appbar Title
         headline1: TextStyle(
           fontFamily: 'Proxima Nova',
-          color: Colors.white,
-          fontSize: 20,
+          color: WHITE,
+          fontSize: 25,
           fontWeight: FontWeight.w600,
-          letterSpacing: 3,
+          letterSpacing: 2,
         ),
         // Menu
         headline2: TextStyle(
