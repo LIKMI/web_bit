@@ -9,7 +9,7 @@ import 'package:web_bit/utils/theme_manager.dart';
 
 import 'screens/main_screen.dart';
 
-void main() async{
+void main() async {
   // Preload first launch theme data before attach to screen
   await getTheme();
   runApp(
@@ -106,8 +106,18 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('created by', style: textTheme.bodyText1),
-                  Text('BIT-LIKMI', style: textTheme.headline1)
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text('created by', style: textTheme.bodyText1),
+                    ),
+                  ),
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text('BIT-LIKMI', style: textTheme.headline1),
+                    ),
+                  )
                 ],
               ),
             )
