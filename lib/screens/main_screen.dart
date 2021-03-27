@@ -68,6 +68,7 @@ class _MainScreenState extends State<MainScreen> {
                   Theme.of(context).bottomAppBarColor.withOpacity(_opacity),
               elevation: 6,
               shadowColor: Theme.of(context).shadowColor,
+              automaticallyImplyLeading: false,
               leading: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: IconButton(
@@ -75,7 +76,7 @@ class _MainScreenState extends State<MainScreen> {
                   onPressed: () => _openDrawer(),
                 ),
               ),
-              titleSpacing: 5,
+              titleSpacing: 0,
               title: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Row(
@@ -131,15 +132,23 @@ class _MainScreenState extends State<MainScreen> {
           color: Theme.of(context).backgroundColor,
           child: Column(
             children: [
-              Flexible(
+              Expanded(
                 flex: 3,
                 child: DrawerHeaderMain(),
               ),
-              Flexible(
+              Expanded(
                 flex: 6,
                 child: DrawerMain(),
               ),
-              Flexible(flex: 1, child: DrawerFooter())
+              SizedBox(height: 5),
+              Flexible(
+                flex: 1,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: DrawerFooter(),
+                ),
+              ),
+              SizedBox(height: 5),
             ],
           ),
         ),
@@ -183,7 +192,9 @@ class DrawerHeaderMain extends StatelessWidget {
                   flex: 2,
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('Account', style: textTheme.headline2),
+                    child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text('Menu', style: textTheme.headline1)),
                   ),
                 ),
                 Flexible(
@@ -191,9 +202,12 @@ class DrawerHeaderMain extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
-                      child: Icon(
-                        Icons.close,
-                        color: textTheme.headline2!.color,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Icon(
+                          Icons.close,
+                          color: textTheme.headline2!.color,
+                        ),
                       ),
                       onTap: () => Navigator.of(context).pop(),
                     ),
@@ -205,24 +219,38 @@ class DrawerHeaderMain extends StatelessWidget {
           SizedBox(height: 10),
           Expanded(
             flex: 3,
-            child: CircleAvatar(
-              radius: 30,
-              backgroundImage: userEmail != null && imageUrl != null
-                  ? NetworkImage(imageUrl!)
-                  : null,
-              child: imageUrl == null
-                  ? Icon(
-                      Icons.account_circle,
-                      size: 30,
+            child: ClipOval(
+              child: userEmail != null && imageUrl != null
+                  ? Image.network(
+                      imageUrl!,
+                      fit: BoxFit.fitWidth,
+                      loadingBuilder: (context, child, event) {
+                        if (event == null) return child;
+                        return FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: CircularProgressIndicator());
+                      },
+                      errorBuilder: (context, _, __) {
+                        return FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: new Icon(Icons.error),
+                        );
+                      },
                     )
-                  : SizedBox.shrink(),
+                  : FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: new Icon(Icons.account_circle),
+                    ),
             ),
           ),
           Expanded(
             flex: 1,
-            child: Text(
-              userEmail == null ? 'Guest' : (name ?? userEmail)!,
-              style: textTheme.headline2,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                userEmail == null ? 'Guest' : (name ?? userEmail)!,
+                style: textTheme.headline2,
+              ),
             ),
           )
         ],
@@ -265,11 +293,11 @@ class _DrawerMainState extends State<DrawerMain> {
             },
             child: Card(
               clipBehavior: Clip.antiAlias,
-              color: Theme.of(context).bottomAppBarColor,
+              color: _indexNow == index
+                  ? textTheme.headline2!.decorationColor
+                  : Theme.of(context).bottomAppBarColor,
               child: ListTile(
-                tileColor: _indexNow == index
-                    ? textTheme.headline2!.decorationColor
-                    : Theme.of(context).bottomAppBarColor,
+                tileColor: Colors.transparent,
                 enableFeedback: true,
                 title: Text(menuModel[index].title,
                     style: TextStyle(

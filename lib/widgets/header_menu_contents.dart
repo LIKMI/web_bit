@@ -39,7 +39,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Row(
                 children: [
                   Flexible(
@@ -62,7 +62,7 @@ class _HeaderMenuContentsState extends State<HeaderMenuContents> {
             ),
             SizedBox(width: 10),
             Expanded(
-              flex: 6,
+              flex: 5,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: menuModel.length,
